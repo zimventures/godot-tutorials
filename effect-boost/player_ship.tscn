@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://vq4fy53ho7sf"]
+
+[ext_resource type="Script" path="res://PlayerShip.gd" id="1_ik8u8"]
+[ext_resource type="Texture2D" uid="uid://b8lx47adpqa4f" path="res://triangle.svg" id="2_gq0fr"]
+[ext_resource type="Texture2D" uid="uid://cyi4xe2dt4gu7" path="res://single_pixel.png" id="3_qjjqq"]
+
+[sub_resource type="Gradient" id="Gradient_7mwao"]
+offsets = PackedFloat32Array(0, 0.644444, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_eqndb"]
+gradient = SubResource("Gradient_7mwao")
+width = 26
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3mncs"]
+lifetime_randomness = 0.38
+emission_shape = 3
+emission_box_extents = Vector3(5, 50, 1)
+particle_flag_align_y = true
+particle_flag_disable_z = true
+direction = Vector3(0, 100, 0)
+spread = 20.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 150.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_min = 100.0
+damping_max = 100.0
+scale_max = 2.0
+color_ramp = SubResource("GradientTexture1D_eqndb")
+
+[node name="PlayerShip" type="Node2D"]
+script = ExtResource("1_ik8u8")
+
+[node name="ShipSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.025, 0.025)
+texture = ExtResource("2_gq0fr")
+
+[node name="JumpTrail" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_3mncs")
+texture = ExtResource("3_qjjqq")
+one_shot = true
+explosiveness = 1.0
+randomness = 0.15
